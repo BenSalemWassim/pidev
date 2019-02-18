@@ -45,22 +45,24 @@ public class FreelanceService {
         
         ResultSet resultSet = null;
         con = ConnectionUtil.getInstance();
-        Object re =GetFreelanceById(jo) ;
-        Object re2 =GetFreelanceByEmail(jo) ;
+        boolean mailTest;
+        boolean pseudoTest;
+        mailTest= uniqueMail(jo.getEmail());
+        pseudoTest = uniquePseudo(jo.getId());
         
         
-        if(re!= null){
+        if(! pseudoTest){
             System.out.println("idExist");
-            if(re2 != null){
+            if(! mailTest){
                 return("idemailExist");
             }
             return("idExist");
         }
-        if(re2!= null){
+        if(! mailTest){
             return("emailExist");
         }
         
-        if(re == null && re2 == null){
+        if(mailTest && pseudoTest){
             try {
                 String sql = "INSERT INTO freelance (id, password, nom, prenom,email,addresse,telephone,secteur) VALUES (?, ?,?, ?, ?,?,?, ?)";
                 
@@ -73,7 +75,7 @@ public class FreelanceService {
                 statement.setString(6, jo.getAddresse());
                 statement.setString(7, jo.getTelephone());
                 statement.setString(8, jo.getSecteur());
-
+                
                 
                 int rowsInserted;
                 
@@ -113,7 +115,7 @@ public class FreelanceService {
             jol.setAddresse(result.getString(6));
             jol.setTelephone(result.getString(7));
             jol.setSecteur(result.getString(8));
-
+            
             
             
         }
@@ -139,7 +141,7 @@ public class FreelanceService {
                 jol.setAddresse(result.getString(6));
                 jol.setTelephone(result.getString(7));
                 jol.setSecteur(result.getString(8));
-
+                
                 
             }
             return jol ;}
@@ -161,8 +163,8 @@ public class FreelanceService {
                 jol.setEmail(result.getString(5));
                 jol.setAddresse(result.getString(6));
                 jol.setTelephone(result.getString(7));
-                                jol.setTelephone(result.getString(8));
-
+                jol.setTelephone(result.getString(8));
+                
                 js.add(jol);
             }
             
@@ -188,11 +190,11 @@ public class FreelanceService {
             ps.setString(3, u.getPassword());
             ps.setString(4, u.getEmail());
             ps.setString(5, u.getTelephone());
-           ps.setString(6, u.getAddresse());
-        ps.setString(7,u.getSecteur());
-
-           ps.setString(8,id);
-
+            ps.setString(6, u.getAddresse());
+            ps.setString(7,u.getSecteur());
+            
+            ps.setString(8,id);
+            
             ps.executeUpdate();
             
             System.out.println("envoyé");
@@ -201,10 +203,10 @@ public class FreelanceService {
         }
     }
     
-        public void supprimerFreelance (String id) {
-                       try {
+    public void supprimerFreelance (String id) {
+        try {
             String reqDelete = "delete from freelance where id=?";
-
+            
             PreparedStatement ps = con.prepareStatement(reqDelete);
             ps.setString(1,id);
             ps.executeUpdate();
@@ -214,12 +216,12 @@ public class FreelanceService {
             ex.printStackTrace();
         }
     }
-          public void changerMDP(String newMdp,String id)
-        {
-            try {
+    public void changerMDP(String newMdp,String id)
+    {
+        try {
             String reqUpdate = "update freelance set password=? where id=?";
             PreparedStatement ps = con.prepareStatement(reqUpdate);
-            ps.setString(1, newMdp);   
+            ps.setString(1, newMdp);
             ps.setString(2,id);
             ps.executeUpdate();
             
@@ -227,24 +229,65 @@ public class FreelanceService {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        }
-     
-        
-      public String MD5(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException
-        {
-            byte[] bytesOfMessage = password.getBytes("UTF-8");
-      MessageDigest md = MessageDigest.getInstance("MD5");
-      byte[] thedigest = md.digest(bytesOfMessage);
-      BigInteger bigInt = new BigInteger(1,thedigest);
-      String hashtext = bigInt.toString(16);
-      while(hashtext.length() < 32 ){
+    }
+    
+    
+    public String MD5(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException
+    {
+        byte[] bytesOfMessage = password.getBytes("UTF-8");
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] thedigest = md.digest(bytesOfMessage);
+        BigInteger bigInt = new BigInteger(1,thedigest);
+        String hashtext = bigInt.toString(16);
+        while(hashtext.length() < 32 ){
             hashtext = "0"+hashtext;
-       }
-      return hashtext;
         }
-
+        return hashtext;
+    }
+    
     public String md5(String password) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public boolean uniqueMail(String mail)
+    {
+        boolean free=true;
+        try{
+            String reqRec = "select count(*) from jobowner ,freelance where freelance.email=? or jobowner.email=?";
+            PreparedStatement ps = con.prepareStatement(reqRec);
+            ps.setString(1,mail);
+            ps.setString(2,mail);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                if(rs.getInt(1)!=0)
+                    free=false;
+            }}
+        
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return free;
+    }
+    public boolean uniquePseudo(String id)
+    {
+        boolean free=true;
+        try{
+            String reqRec = "select count(*) from jobowner ,freelance where freelance.id=? or jobowner.id=?";
+            PreparedStatement ps = con.prepareStatement(reqRec);
+            ps.setString(1,id);
+            ps.setString(2,id);
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                if(rs.getInt(1)!=0)
+                    free=false;
+            }}
+        
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return free;
     }
     
 }

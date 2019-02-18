@@ -42,7 +42,7 @@
                   </Pane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="pane2" layoutX="148.0" layoutY="223.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #C4D1C9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="pane2" layoutX="148.0" layoutY="223.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #C4D1C9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <GridPane layoutX="126.0" layoutY="98.0" opacity="0.76" prefHeight="469.0" prefWidth="721.0">
                      <children>
@@ -105,7 +105,7 @@
                   </GridPane>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="pane3" layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #161616;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="pane3" layoutX="10.0" layoutY="10.0" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #161616;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <JFXButton buttonType="RAISED" layoutX="453.0" layoutY="600.0" onAction="#ButtonAction" style="-fx-background-radius: 55px;" styleClass="button1" stylesheets="@../styling/fullpackstyling.css" text="S'inscrire">
                      <font>

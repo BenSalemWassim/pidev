@@ -30,6 +30,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -63,15 +64,37 @@ public class LoginController implements Initializable {
     private StackPane stackpane;
     @FXML
     private AnchorPane anchorpane;
+     @FXML
+    private CheckBox admin;
+     
     /// --
     
     @FXML
     public void handleButtonAction(ActionEvent  event) {
-        
-       
+ 
+
             //login here
              if (event.getSource() == btnSignin) {
-             
+                if(admin.isSelected()) {
+                  if (AdminlogIn().equals("Success")) {
+                         try {
+                    
+                    //add you loading or delays - ;-)
+                    Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    //stage.setMaximized(true);
+                    stage.close();
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/sample.fxml")));
+                    stage.setScene(scene);
+                    stage.show();
+                    
+                } catch (IOException ex) {
+                    System.err.println(ex.getMessage());
+                }
+                  
+                  } 
+    
+    }else{
             
             if (logIn().equals("Success")) {
                 try {
@@ -92,10 +115,10 @@ public class LoginController implements Initializable {
             }
         }
     }
-    
+    }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         Connection con = ConnectionUtil.getInstance();
         if (con == null) {
             lblErrors.setTextFill(Color.TOMATO);
@@ -163,6 +186,36 @@ public class LoginController implements Initializable {
         
     }
     
+     private String AdminlogIn()   {
+        
+        String id = txtUsername.getText();
+        String password = txtPassword.getText();
+        //query
+        
+        try {
+
+           LoginService l =new LoginService();
+            String res = l.getInstance().AdminlogIn(id,id,password);
+            
+            if (res.equalsIgnoreCase("Error")) {
+                lblErrors.setTextFill(Color.TOMATO);
+                lblErrors.setText("Email ou mot de passe non valide.");
+                System.err.println("Wrong Logins --///");
+                return "Error";
+                
+            } else {
+                lblErrors.setTextFill(Color.GREEN);
+                lblErrors.setText("Login Successful..Redirecting..");
+                System.out.println("Successfull Login");
+                return "Success";
+            }
+            
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+            return "Exception";
+        }
+        
+    }
     @FXML
     public void SignUp(ActionEvent event) throws IOException{
         

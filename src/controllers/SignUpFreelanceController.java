@@ -42,7 +42,7 @@ import javax.mail.internet.InternetAddress;
  *
  * @author wassim
  */
-public class FreelanceController implements Initializable {
+public class SignUpFreelanceController implements Initializable {
     
     /**
      * Initializes the controller class.
@@ -212,8 +212,7 @@ public class FreelanceController implements Initializable {
                 
                 
             }
-            public void ButtonAction(ActionEvent event) throws SQLException, UnsupportedEncodingException, NoSuchAlgorithmException {
-                
+            public void ButtonAction(ActionEvent event) throws SQLException, UnsupportedEncodingException, NoSuchAlgorithmException, IOException {
                 if (txtEmail.getText().isEmpty() || txtNom.getText().isEmpty() || txtPrenom.getText().isEmpty() || txtUserName.getText().isEmpty()
                         ||txttelephone.getText().isEmpty() ||  txtAddresse.getText().isEmpty()
                         || password1.getText().isEmpty()|| password.getText().isEmpty()) {
@@ -224,7 +223,9 @@ public class FreelanceController implements Initializable {
                     labNotif.setText("tous les champs doivent être remplis");
                     err.setTextFill(Color.TOMATO);
                     err.setText("tous les champs doivent être remplis");
-                    
+                  
+                   
+
                 }else if (! isValidEmailAddress(txtEmail.getText())){
                     
                     labNotif.setTextFill(Color.TOMATO);

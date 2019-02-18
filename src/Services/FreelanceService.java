@@ -245,10 +245,7 @@ public class FreelanceService {
         return hashtext;
     }
     
-    public String md5(String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+  
     public boolean uniqueMail(String mail)
     {
         boolean free=true;

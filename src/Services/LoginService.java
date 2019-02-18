@@ -69,6 +69,43 @@ public class LoginService {
         
         
     }
+public String AdminlogIn(String id ,String email ,String password) {
+        
+        Connection con = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        con = ConnectionUtil.getInstance();
+        
+        //query
+        String sql = "SELECT * FROM admin Where ( id = ? or email = ? ) and password = ?  ";
+        
+        try {
+            preparedStatement = con.prepareStatement(sql);
+            preparedStatement.setString(1, id);
+                        preparedStatement.setString(2, email);
+               preparedStatement.setString(3, password);
+         
+
+            resultSet = preparedStatement.executeQuery();
+            
+            if (resultSet.next()) {
+                LoginService.loggedUser = new User(resultSet.getString("id"),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6), resultSet.getString(7));
+                System.out.println(loggedUser) ;
+                return "Success";
+            } else {
+                
+                System.err.println("Wrong Logins --///");
+                return "Error";
+            }
+            
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            return "Exception";
+        }
+        
+        
+        
+    }
 
     private static LoginService instance;
 
@@ -118,7 +155,6 @@ public class LoginService {
         Scene scene = stage.getScene();
         if (scene == null) {
             scene = new Scene(page, 700, 550);
-            scene.getStylesheets().add(LoginService.class.getResource("demo.css").toExternalForm());
             stage.setScene(scene);
         } else {
             stage.getScene().setRoot(page);

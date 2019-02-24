@@ -11,10 +11,11 @@ package Entity;
  */
 public class JobOwner extends User {
 
-    public JobOwner(String id, String password, String nom, String prenom, String email, String addresse, String telephone) {
-        super(id, password, nom, prenom, email, addresse, telephone);
+    public JobOwner(String id, String password, String nom, String prenom, String email, String addresse, String telephone, String type) {
+        super(id, password, nom, prenom, email, addresse, telephone, type);
     }
 
+ 
     public JobOwner() {
     }
     

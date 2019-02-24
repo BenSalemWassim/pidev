@@ -16,10 +16,16 @@ public class Freelance extends User {
     
     
     String secteur ;
-    public Freelance(String id, String password, String nom, String prenom, String email, String addresse, String telephone , String secteur) {
-        super(id, password, nom, prenom, email, addresse, telephone);
-        this.secteur = secteur ;
+
+    public Freelance(String secteur, String id, String password, String nom, String prenom, String email, String addresse, String telephone, String type) {
+        super(id, password, nom, prenom, email, addresse, telephone, type);
+        this.secteur = secteur;
     }
+
+   
+
+
+    
 
     public String getSecteur() {
         return secteur;

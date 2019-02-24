@@ -84,7 +84,7 @@ public class LoginController implements Initializable {
                     Stage stage = (Stage) node.getScene().getWindow();
                     //stage.setMaximized(true);
                     stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/sample.fxml")));
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/OnBoard.fxml")));
                     stage.setScene(scene);
                     stage.show();
                     
@@ -104,7 +104,7 @@ public class LoginController implements Initializable {
                     Stage stage = (Stage) node.getScene().getWindow();
                     //stage.setMaximized(true);
                     stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/sample.fxml")));
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/Home.fxml")));
                     stage.setScene(scene);
                     stage.show();
                     
@@ -158,13 +158,12 @@ public class LoginController implements Initializable {
         
         String id = txtUsername.getText();
         String password = txtPassword.getText();
-        JobOwnerService a = new JobOwnerService ();
         //query
         
         try {
 
            LoginService l =new LoginService();
-            String res = l.getInstance().logIn(id,id,a.MD5(password));
+            String res = l.getInstance().logIn(id,id,l.MD5(password));
             
             if (res.equalsIgnoreCase("Error")) {
                 lblErrors.setTextFill(Color.TOMATO);
@@ -195,7 +194,7 @@ public class LoginController implements Initializable {
         try {
 
            LoginService l =new LoginService();
-            String res = l.getInstance().AdminlogIn(id,id,password);
+            String res = l.getInstance().AdminlogIn(id,id,l.MD5(password));
             
             if (res.equalsIgnoreCase("Error")) {
                 lblErrors.setTextFill(Color.TOMATO);

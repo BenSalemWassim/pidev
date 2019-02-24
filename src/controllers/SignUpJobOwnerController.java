@@ -69,7 +69,7 @@ public class SignUpJobOwnerController implements Initializable {
         if (txtEmail.getText().isEmpty() || txtNom.getText().isEmpty() || txtPrenom.getText().isEmpty() || txtUserName.getText().isEmpty()
                 ||txttelephone.getText().isEmpty() ||  txtAddresse.getText().isEmpty()
                 || password1.getText().isEmpty()|| password.getText().isEmpty()) {
-                        labNotif.setVisible(true);
+              labNotif.setVisible(true);
 
             labNotif.setTextFill(Color.TOMATO);
             labNotif.setText("tous les champs doivent être remplis");
@@ -105,7 +105,7 @@ public class SignUpJobOwnerController implements Initializable {
                 JobOwnerService a = new JobOwnerService ();
 
      JobOwner newj = new JobOwner( txtUserName.getText(),a.MD5(password1.getText()),txtNom.getText(),txtPrenom.getText(),
-                txtEmail.getText(), txtAddresse.getText(),txttelephone.getText()  );
+                txtEmail.getText(), txtAddresse.getText(),txttelephone.getText(),"jobowner"  );
                 JobOwnerService js = new JobOwnerService() ;
                 String res = js.AddJobOwner(newj);
                if( res.equals("ok")){

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.controlsfx.control.Notifications;
 import utils.ConnectionUtil;
 
 /**
@@ -64,7 +65,7 @@ public class FreelanceService {
         
         if(mailTest && pseudoTest){
             try {
-                String sql = "INSERT INTO freelance (id, password, nom, prenom,email,addresse,telephone,secteur) VALUES (?, ?,?, ?, ?,?,?, ?)";
+                String sql = "INSERT INTO user (id, password, nom, prenom,email,addresse,telephone,secteur,type) VALUES (?, ?,?, ?, ?,?,?, ?,?)";
                 
                 PreparedStatement statement = con.prepareStatement(sql);
                 statement.setString(1, jo.getId());
@@ -75,7 +76,8 @@ public class FreelanceService {
                 statement.setString(6, jo.getAddresse());
                 statement.setString(7, jo.getTelephone());
                 statement.setString(8, jo.getSecteur());
-                
+                                statement.setString(9, "freelance");
+
                 
                 int rowsInserted;
                 
@@ -115,7 +117,8 @@ public class FreelanceService {
             jol.setAddresse(result.getString(6));
             jol.setTelephone(result.getString(7));
             jol.setSecteur(result.getString(8));
-            
+                        jol.setType(result.getString(9));
+
             
             
         }
@@ -141,7 +144,8 @@ public class FreelanceService {
                 jol.setAddresse(result.getString(6));
                 jol.setTelephone(result.getString(7));
                 jol.setSecteur(result.getString(8));
-                
+                                        jol.setType(result.getString(9));
+
                 
             }
             return jol ;}
@@ -164,7 +168,8 @@ public class FreelanceService {
                 jol.setAddresse(result.getString(6));
                 jol.setTelephone(result.getString(7));
                 jol.setTelephone(result.getString(8));
-                
+                                        jol.setType(result.getString(9));
+
                 js.add(jol);
             }
             
@@ -177,35 +182,46 @@ public class FreelanceService {
     
     
     
-    public void modifierFreeLance(Freelance u,String id) {
+    public void modifierFreelance(Freelance u,String id) {
         try {
-            String reqUpdate = "update freelance set"
+            String reqUpdate = "update user set"
+                    
                     + " nom=?,"
                     + "prenom=?,"
-                    + "password=?,"
-                    + "email=? , telephone=? ,addresse=? ,secteur=?  where ?";
+                    +"telephone=? ,addresse=?  where id = ?";
             PreparedStatement ps = con.prepareStatement(reqUpdate);
             ps.setString(1, u.getNom());
             ps.setString(2, u.getPrenom());
-            ps.setString(3, u.getPassword());
-            ps.setString(4, u.getEmail());
-            ps.setString(5, u.getTelephone());
-            ps.setString(6, u.getAddresse());
-            ps.setString(7,u.getSecteur());
+            ps.setString(3, u.getTelephone());
+            ps.setString(4, u.getAddresse());
             
-            ps.setString(8,id);
+            ps.setString(5,id);
             
-            ps.executeUpdate();
-            
-            System.out.println("envoyé");
+                int col= ps.executeUpdate();
+                    if(col >0){
+             Notifications.create()
+                    .title("Notification")
+                    .text("votre compte a été mis à jour").darkStyle()
+                    .showInformation();
+            System.out.println("envoyé");}
+          else{
+          Notifications.create()
+                    .title("Notification")
+                    .text("votre compte n'a pas été mis à jour").darkStyle()
+                    .showError();
+          }
+             
         } catch (SQLException ex) {
-            ex.printStackTrace();
+             Notifications.create()
+                    .title("Notification")
+                    .text("Error").darkStyle()
+                    .showError();
         }
     }
     
     public void supprimerFreelance (String id) {
         try {
-            String reqDelete = "delete from freelance where id=?";
+            String reqDelete = "delete from user where id=?";
             
             PreparedStatement ps = con.prepareStatement(reqDelete);
             ps.setString(1,id);
@@ -216,17 +232,34 @@ public class FreelanceService {
             ex.printStackTrace();
         }
     }
-    public void changerMDP(String newMdp,String id)
+    public void changerMDP(String mdp ,String newMdp,String id)
     {
         try {
-            String reqUpdate = "update freelance set password=? where id=?";
+            String reqUpdate = "update user set password=? where id=? and password= ?";
             PreparedStatement ps = con.prepareStatement(reqUpdate);
             ps.setString(1, newMdp);
             ps.setString(2,id);
-            ps.executeUpdate();
-            
-            System.out.println("envoyé");
+                        ps.setString(3,mdp);
+
+             int col= ps.executeUpdate();
+                    if(col >0){
+             Notifications.create()
+                    .title("Notification")
+                    .text("votre compte a été mis à jour").darkStyle()
+                    .showInformation();
+            System.out.println("envoyé");}
+          else{
+          Notifications.create()
+                    .title("Notification")
+                    .text("mot de passe incorrect").darkStyle()
+                    .showError();
+          }
+             
         } catch (SQLException ex) {
+             Notifications.create()
+                    .title("Notification")
+                    .text("Error").darkStyle()
+                    .showError();
             ex.printStackTrace();
         }
     }
@@ -250,10 +283,10 @@ public class FreelanceService {
     {
         boolean free=true;
         try{
-            String reqRec = "select count(*) from jobowner ,freelance where freelance.email=? or jobowner.email=?";
+            String reqRec = "select count(*) from user where email=? ";
             PreparedStatement ps = con.prepareStatement(reqRec);
             ps.setString(1,mail);
-            ps.setString(2,mail);
+            
             
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
@@ -270,10 +303,9 @@ public class FreelanceService {
     {
         boolean free=true;
         try{
-            String reqRec = "select count(*) from jobowner ,freelance where freelance.id=? or jobowner.id=?";
+            String reqRec = "select count(*) from user where id=? ";
             PreparedStatement ps = con.prepareStatement(reqRec);
             ps.setString(1,id);
-            ps.setString(2,id);
             
             ResultSet rs = ps.executeQuery();
             while (rs.next()){

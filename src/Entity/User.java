@@ -19,8 +19,9 @@ public class User {
         private String email ; 
         private String addresse ; 
         private String telephone ; 
+        private String type;
 
-    public User(String id, String password, String nom, String prenom, String email, String addresse, String telephone) {
+    public User(String id, String password, String nom, String prenom, String email, String addresse, String telephone, String type) {
         this.id = id;
         this.password = password;
         this.nom = nom;
@@ -28,8 +29,18 @@ public class User {
         this.email = email;
         this.addresse = addresse;
         this.telephone = telephone;
+        this.type = type;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+  
     @Override
     public int hashCode() {
         int hash = 5;
@@ -53,9 +64,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", password=" + password + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", addresse=" + addresse + ", telephone=" + telephone + '}';
+        return "User{" + "id=" + id + ", password=" + password + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", addresse=" + addresse + ", telephone=" + telephone + ", type=" + type + '}';
     }
 
+   
     public User() {
     }
 

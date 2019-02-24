@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.controlsfx.control.Notifications;
 import utils.ConnectionUtil;
 
 /**
@@ -63,7 +64,7 @@ public class JobOwnerService {
         
         if(mailTest && pseudoTest){
             try {
-                String sql = "INSERT INTO jobowner (id, password, nom, prenom,email,addresse,telephone) VALUES (?, ?,?, ?, ?,?,?)";
+                String sql = "INSERT INTO user (id, password, nom, prenom,email,addresse,telephone,type) VALUES (?, ?,?, ?, ?,?,?,?)";
                 
                 PreparedStatement statement = con.prepareStatement(sql);
                 statement.setString(1, jo.getId());
@@ -73,7 +74,8 @@ public class JobOwnerService {
                 statement.setString(5, jo.getEmail());
                 statement.setString(6, jo.getAddresse());
                 statement.setString(7, jo.getTelephone());
-                
+                statement.setString(8,"jobowner");
+
                 int rowsInserted;
                 
                 rowsInserted = statement.executeUpdate();
@@ -95,7 +97,7 @@ public class JobOwnerService {
     }
     public JobOwner GetJobOwnerById (JobOwner jo) throws SQLException {
         
-        String sql = "select * from jobowner where id='"+jo.getId()+"'";
+        String sql = "select * from user where id='"+jo.getId()+"'";
         PreparedStatement statement = con.prepareStatement(sql);
         ResultSet result = statement.executeQuery(sql);
         if (!result.next()){
@@ -118,7 +120,7 @@ public class JobOwnerService {
     }
     public JobOwner GetJobOwnerByEmail (JobOwner jo) throws SQLException {
         
-        String sql = "select * from jobowner where email='"+jo.getEmail()+"'";
+        String sql = "select * from user where email='"+jo.getEmail()+"'";
         PreparedStatement statement = con.prepareStatement(sql);
         ResultSet result = statement.executeQuery(sql);
         if (!result.next()){
@@ -171,22 +173,28 @@ public class JobOwnerService {
     
     public void modifierJobOwner(JobOwner u,String id) {
         try {
-            String reqUpdate = "update Jobowner set"
+            String reqUpdate = "update user set"
                     + " nom=?,"
-                    + "prenom=?,"
-                    + "password=?,"
-                    + "email=? , telephone=? ,addresse=?  where ?";
+                    + "prenom=?,  telephone=? ,addresse=?  where id=?";
             PreparedStatement ps = con.prepareStatement(reqUpdate);
             ps.setString(1, u.getNom());
             ps.setString(2, u.getPrenom());
-            ps.setString(3, u.getPassword());
-            ps.setString(4, u.getEmail());
-            ps.setString(5, u.getTelephone());
-           ps.setString(6, u.getAddresse());
-           ps.setString(7,id);
-            ps.executeUpdate();
-            
-            System.out.println("envoyé");
+            ps.setString(3, u.getTelephone());
+           ps.setString(4, u.getAddresse());
+           ps.setString(5,id);
+       int col  =    ps.executeUpdate();
+          if(col >0){
+             Notifications.create()
+                    .title("Notification")
+                    .text("votre compte a été mis à jour").darkStyle()
+                    .showInformation();
+            System.out.println("envoyé");}
+          else{
+          Notifications.create()
+                    .title("Notification")
+                    .text("votre compte n'a pas été mis à jour").darkStyle()
+                    .showError();
+          }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -205,17 +213,35 @@ public class JobOwnerService {
             ex.printStackTrace();
         }
     }
-          public void changerMDP(String newMdp,String id)
+          public void changerMDP(String mdp ,String newMdp,String id)
         {
             try {
-            String reqUpdate = "update jobowner set password=? where id=?";
+            String reqUpdate = "update user set password=? where id=? and password= ?";
             PreparedStatement ps = con.prepareStatement(reqUpdate);
             ps.setString(1, newMdp);   
             ps.setString(2,id);
-            ps.executeUpdate();
-            
-            System.out.println("envoyé");
+             ps.setString(3,mdp);
+
+           int col= ps.executeUpdate();
+                    if(col >0){
+             Notifications.create()
+                    .title("Notification")
+                    .text("votre compte a été mis à jour").darkStyle()
+                    .showInformation();
+            System.out.println("envoyé");}
+          else{
+          Notifications.create()
+                    .title("Notification")
+                    .text("mot de passe incorrect").darkStyle()
+                    .showError();
+          }
+             
         } catch (SQLException ex) {
+             Notifications.create()
+                    .title("Notification")
+                    .text("Error").darkStyle()
+                    .showError();
+             
             ex.printStackTrace();
         }
         }
@@ -234,19 +260,17 @@ public class JobOwnerService {
       return hashtext;
         }
 
-    public String md5(String password) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
     
     
         public boolean uniqueMail(String mail)
         { 
             boolean free=true;
           try{
-              String reqRec = "select count(*) from jobowner ,freelance where freelance.email=? or jobowner.email=?";
+              String reqRec = "select count(*) from user where email=?";
                PreparedStatement ps = con.prepareStatement(reqRec);
             ps.setString(1,mail);
-                        ps.setString(2,mail);
+                      
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()){  
@@ -263,10 +287,9 @@ public class JobOwnerService {
         { 
             boolean free=true;
           try{
-              String reqRec = "select count(*) from jobowner ,freelance where freelance.id=? or jobowner.id=?";
+              String reqRec = "select count(*) from user where id=? ";
                PreparedStatement ps = con.prepareStatement(reqRec);
             ps.setString(1,id);
-                        ps.setString(2,id);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()){  

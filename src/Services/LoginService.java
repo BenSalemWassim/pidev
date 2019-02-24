@@ -5,7 +5,13 @@
 */
 package Services;
 
+import Entity.Freelance;
+import Entity.JobOwner;
 import Entity.User;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +22,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import utils.ConnectionUtil;
 
@@ -30,7 +35,7 @@ public class LoginService {
 
         
     
-    public String logIn(String id ,String email ,String password) {
+    public String logIn(String id ,String email ,String password) throws SQLException {
         
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -38,21 +43,23 @@ public class LoginService {
         con = ConnectionUtil.getInstance();
         
         //query
-        String sql = "SELECT * FROM jobowner , freelance Where ( (freelance.id = ? or freelance.email = ? )or (jobowner.id = ? or jobowner.email = ?))and (jobowner.password = ? or freelance.password = ?) ";
+        String sql = "SELECT * FROM user Where ( (id = ? or email = ? )and (password = ?) )";
         
         try {
             preparedStatement = con.prepareStatement(sql);
             preparedStatement.setString(1, id);
             preparedStatement.setString(2, email);
-              preparedStatement.setString(3, id);
-            preparedStatement.setString(4, email);
-            preparedStatement.setString(5, password);
-                        preparedStatement.setString(6, password);
+              preparedStatement.setString(3, password);
 
             resultSet = preparedStatement.executeQuery();
             
             if (resultSet.next()) {
-                LoginService.loggedUser = new User(resultSet.getString("id"),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6), resultSet.getString(7));
+                if(resultSet.getString("type").equals("freelance")){
+      LoginService.loggedUser = new Freelance(resultSet.getString("secteur"),resultSet.getString("id"),resultSet.getString("password"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("email"),resultSet.getString("addresse"), resultSet.getString("telephone"),resultSet.getString("type"));
+
+                }else  if(resultSet.getString("type").equals("jobowner")){
+      LoginService.loggedUser = new JobOwner(resultSet.getString("id"),resultSet.getString("password"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("email"),resultSet.getString("addresse"), resultSet.getString("telephone"),resultSet.getString("type"));
+                }
                 System.out.println(loggedUser) ;
                 return "Success";
             } else {
@@ -89,7 +96,7 @@ public String AdminlogIn(String id ,String email ,String password) {
             resultSet = preparedStatement.executeQuery();
             
             if (resultSet.next()) {
-                LoginService.loggedUser = new User(resultSet.getString("id"),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6), resultSet.getString(7));
+                LoginService.loggedUser = new User(resultSet.getString("id"),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6), resultSet.getString(7),  resultSet.getString(8) );
                 System.out.println(loggedUser) ;
                 return "Success";
             } else {
@@ -131,7 +138,6 @@ public String AdminlogIn(String id ,String email ,String password) {
 
     public void userLogout(){
         loggedUser = null;
-        gotoLogin();
     }
 
     public void gotoProfile() {
@@ -144,22 +150,33 @@ public String AdminlogIn(String id ,String email ,String password) {
 
     private void gotoLogin() {
         try {
-            replaceSceneContent("/fxml/login.fxml");
+            replaceSceneContent("/fxml/Login.fxml");
         } catch (Exception ex) {
             Logger.getLogger(LoginService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private Parent replaceSceneContent(String fxml) throws Exception {
+    private void replaceSceneContent(String fxml) throws Exception {
         Parent page = (Parent) FXMLLoader.load(LoginService.class.getResource(fxml), null, new JavaFXBuilderFactory());
         Scene scene = stage.getScene();
-        if (scene == null) {
-            scene = new Scene(page, 700, 550);
-            stage.setScene(scene);
-        } else {
+     
             stage.getScene().setRoot(page);
-        }
+        
         stage.sizeToScene();
-        return page;
+        return ;
     }
+    
+       public String MD5(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException
+    {
+        byte[] bytesOfMessage = password.getBytes("UTF-8");
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] thedigest = md.digest(bytesOfMessage);
+        BigInteger bigInt = new BigInteger(1,thedigest);
+        String hashtext = bigInt.toString(16);
+        while(hashtext.length() < 32 ){
+            hashtext = "0"+hashtext;
+        }
+        return hashtext;
+    }
+    
 }

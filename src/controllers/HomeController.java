@@ -6,31 +6,25 @@
 package controllers;
 
 
+import Entity.Freelance;
+import Entity.User;
 import Services.LoginService;
+import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.util.Callback;
-import utils.ConnectionUtil;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -39,11 +33,94 @@ import utils.ConnectionUtil;
  */
 public class HomeController implements Initializable {
 
+    
+
+     @FXML  
+     private BorderPane root ;
+     @FXML  
+     private Label nom ;
+ private final ObjectProperty<SubMenuController> currentSubMenuController = new SimpleObjectProperty<>(); 
+   
+ 
+  public void initialize() {  
+      
+     
+      
+//         try {
+//             // selectedView property of currentSubMenu:
+//             
+//             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/userSubMenu.fxml"));
+//             Parent userSubMenu = (Parent) loader.load();
+//             System.out.println("jj");
+//             currentSubMenuController.set((SubMenuController)loader.getController());
+//             
+//             
+//             root.setLeft(userSubMenu);
+//             ObservableValue<URL> subMenuSelectedView = Bindings.<URL>select(currentSubMenuController, "selectedView");
+//             subMenuSelectedView.addListener(new ChangeListener<URL>() {
+//                 public void changed(ObservableValue<? extends URL> obs, URL oldView, URL newView) {
+//                     if (newView == null) {
+//                         root.setCenter(null);
+//                     } else {
+//                         try {
+//                               FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Profil.fxml"));
+//                             Parent view = (Parent) loader.load();
+//                             root.setCenter(view);
+//                         } catch (IOException ex) {
+//                             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+//                         }
+//                     }
+//                 }
+//             });
+//             // ...  
+//         } catch (IOException ex) {
+//             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+//         }
+     }  
+  
+  
+  
+  @FXML
+  public void ProfilAction(ActionEvent event) throws IOException{
+      User cu = LoginService.getInstance().getLoggedUser();
+      
+      if(cu.getType().equals("freelance")){
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProfilFreelance.fxml"));
+          Parent view = (Parent) loader.load();
+          root.setCenter(view);
+      }
+      else  if(cu.getType().equals("jobowner")){
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Profil.fxml"));
+          Parent view = (Parent) loader.load();
+          root.setCenter(view);
+          
+      }
+      
+      
+      
+  }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+ User cu = LoginService.getInstance().getLoggedUser();
+ System.out.print(cu);
+      nom.setText(cu.getId());
+    
+    
     }
+  
+  @FXML StackPane stackpane;
+ public void deco() throws IOException {
+  
+         
+                    Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
 
+        stackpane.getChildren().addAll(root);
+      LoginService.getInstance().userLogout();
+
+    }
    
 
+  
+    
 }

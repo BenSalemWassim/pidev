@@ -271,8 +271,8 @@ public class SignUpFreelanceController implements Initializable {
             void AjouterFreelance() throws SQLException, UnsupportedEncodingException, NoSuchAlgorithmException{
                 FreelanceService a = new FreelanceService ();
                 
-                Freelance newj = new Freelance( txtUserName.getText(),a.MD5(password1.getText()),txtNom.getText(),txtPrenom.getText(),
-                        txtEmail.getText(), txtAddresse.getText(),txttelephone.getText() ,secteur );
+                Freelance newj = new Freelance(secteur, txtUserName.getText(),a.MD5(password1.getText()),txtNom.getText(),txtPrenom.getText(),
+                        txtEmail.getText(), txtAddresse.getText(),txttelephone.getText() ,"freelance" );
                 FreelanceService js = new FreelanceService() ;
                 String res = js.AddFreelance(newj);
                 if( res.equals("ok")){

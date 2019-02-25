@@ -30,8 +30,8 @@
                      </font>
                   </Label>
                   <Separator layoutX="42.0" layoutY="586.0" prefHeight="7.0" prefWidth="435.0" />
-                  <JFXTextField fx:id="txtNom" focusColor="BLACK" labelFloat="true" layoutX="141.0" layoutY="127.0" prefHeight="25.0" prefWidth="226.0" promptText="Nom" />
-                  <JFXTextField fx:id="txtPrenom" focusColor="BLACK" labelFloat="true" layoutX="144.0" layoutY="196.0" prefHeight="25.0" prefWidth="226.0" promptText="Prenom" />
+                  <JFXTextField fx:id="txtNom" focusColor="BLACK" labelFloat="true" layoutX="141.0" layoutY="81.0" prefHeight="25.0" prefWidth="226.0" promptText="Nom" />
+                  <JFXTextField fx:id="txtPrenom" focusColor="BLACK" labelFloat="true" layoutX="144.0" layoutY="150.0" prefHeight="25.0" prefWidth="226.0" promptText="Prenom" />
                   <JFXTextField fx:id="txtAddresse" focusColor="BLACK" labelFloat="true" layoutX="144.0" layoutY="259.0" prefHeight="25.0" prefWidth="226.0" promptText="Addresse" />
                   <JFXTextField fx:id="txttelephone" focusColor="BLACK" labelFloat="true" layoutX="146.0" layoutY="325.0" prefHeight="25.0" prefWidth="226.0" promptText="Téléphone" />
                   <JFXPasswordField fx:id="password" focusColor="BLACK" labelFloat="true" layoutX="144.0" layoutY="466.0" prefHeight="25.0" prefWidth="226.0" promptText="Mot de passe" />
@@ -40,6 +40,8 @@
                   <Separator layoutX="42.0" layoutY="445.0" prefHeight="7.0" prefWidth="435.0" />
                   <JFXButton fx:id="aa1" layoutX="434.0" layoutY="547.0" onAction="#ButtonAction1" text="modifier" />
                   <Label fx:id="labNotif1" layoutX="60.0" layoutY="559.0" prefHeight="17.0" prefWidth="339.0" />
+                  <Label fx:id="mail" layoutX="193.0" layoutY="213.0" prefHeight="17.0" prefWidth="184.0" />
+                  <Label layoutX="142.0" layoutY="213.0" text="Email" />
                </children>
             </Pane>
          </children>

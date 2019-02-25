@@ -253,11 +253,6 @@ public class LoginController implements Initializable {
     }
     
     
-    public void mdpo(ActionEvent event) throws IOException{
-    
-    Parent root = FXMLLoader.load(getClass().getResource("/fxml/MdpOublie.fxml"));
-            
-            stackpane.getChildren().add(root);
-    }
+  
 }
 

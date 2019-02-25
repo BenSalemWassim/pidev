@@ -85,7 +85,7 @@ public class HomeJobOwnerController implements Initializable {
       
     
      
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Profil.fxml"));
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProfilJobOwner.fxml"));
           Parent view = (Parent) loader.load();
           root.setCenter(view);
           

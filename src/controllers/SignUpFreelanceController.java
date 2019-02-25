@@ -10,6 +10,7 @@ import Entity.JobOwner;
 import Services.FreelanceService;
 import Services.JobOwnerService;
 import Services.LoginService;
+import Services.MailingService;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -285,7 +286,8 @@ public class SignUpFreelanceController implements Initializable {
                                     err.setText("ajoutée avec succées");
                                     LoginService s = new LoginService();
                                     s.getInstance().changeLoggedUser(newj);
-                                    
+                                    MailingService m = new MailingService();
+                                    m.envoi(newj.getEmail(), newj.getNom());
                                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/HomeFreelance.fxml")));
                                     Stage stage = (Stage) dad.getScene().getWindow();
                                     

@@ -67,7 +67,8 @@ public class ProfilJobOwnerController implements Initializable {
     private Label labNotif ;
      @FXML
     private Label labNotif1 ;
-    
+    @FXML
+    private Label mail ;
     
     
     /**
@@ -80,8 +81,8 @@ public class ProfilJobOwnerController implements Initializable {
         User cu = LoginService.getInstance().getLoggedUser();
       
         txtNom.setText(cu.getNom());
-        
-        txtPrenom.setText(cu.getPrenom());
+                mail.setText(cu.getEmail());
+              txtPrenom.setText(cu.getPrenom());
         txtAddresse.setText(cu.getAddresse());
         txttelephone.setText(cu.getTelephone());
         System.out.print(cu.getType());

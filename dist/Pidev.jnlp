@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Pidev.jar" size="158856" download="eager" />
+    <jar href="Pidev.jar" size="162831" download="eager" />
     <jar href="lib\UndecoratorBis.jar" size="121176" download="eager" />
     <jar href="lib\activation.jar" size="124332" download="eager" />
     <jar href="lib\controlsfx-8.40.14.jar" size="1215643" download="eager" />

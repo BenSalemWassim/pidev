@@ -3,17 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controllers;
+package Services;
 
-import com.jfoenix.controls.JFXButton;
-import java.net.URL;
 import java.util.Date;
 import java.util.Properties;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -21,33 +15,23 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- * FXML Controller class
  *
  * @author wassim
  */
-public class MdpOublieController implements Initializable {
+public class MailingService {
 
-    /**
-     * Initializes the controller class.
-     */
-    @FXML
-    private Label lab ;
-    @FXML
-    private JFXButton btn ;
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-  public void  Actionhandler (ActionEvent event){
+    public MailingService() {
+    }
+      public void  envoi (String too, String nom){
   
    try{
             String host ="smtp.gmail.com" ;
             String user = "smartstart.1.ss@gmail.com";
             String pass = "smartstart123";
-            String to = "wassimbensalem.WBS@gmail.com";
+            String to = too;
             String from = "smartstart.1.ss@gmail.com";
-            String subject = "This is confirmation number for your expertprogramming account. Please insert this number to activate your account.";
-            String messageText = "Your Is Test Email :";
+            String subject = "SmartStart";
+            String messageText = "Bienvenue "+nom+" sur SmartStart ";
             boolean sessionDebug = false;
 
             Properties props = System.getProperties();
@@ -81,5 +65,4 @@ public class MdpOublieController implements Initializable {
   
   
   }
-    
 }

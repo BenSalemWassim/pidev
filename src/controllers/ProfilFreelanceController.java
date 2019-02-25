@@ -69,7 +69,8 @@ public class ProfilFreelanceController implements Initializable {
     private Label labNotif1 ;
     @FXML
     private Label sec;
-    
+     @FXML
+    private Label mail;
     
     /**
      * Initializes the controller class.
@@ -88,7 +89,7 @@ public class ProfilFreelanceController implements Initializable {
 
         sec.setText(cu.getSecteur());
         txtNom.setText(cu.getNom());
-        
+        mail.setText(cu.getEmail());
         txtPrenom.setText(cu.getPrenom());
         txtAddresse.setText(cu.getAddresse());
         txttelephone.setText(cu.getTelephone());

@@ -75,7 +75,7 @@ public class JobOwnerService {
                 statement.setString(6, jo.getAddresse());
                 statement.setString(7, jo.getTelephone());
                 statement.setString(8,"jobowner");
-
+                
                 int rowsInserted;
                 
                 rowsInserted = statement.executeUpdate();
@@ -180,30 +180,32 @@ public class JobOwnerService {
             ps.setString(1, u.getNom());
             ps.setString(2, u.getPrenom());
             ps.setString(3, u.getTelephone());
-           ps.setString(4, u.getAddresse());
-           ps.setString(5,id);
-       int col  =    ps.executeUpdate();
-          if(col >0){
-             Notifications.create()
-                    .title("Notification")
-                    .text("votre compte a été mis à jour").darkStyle()
-                    .showInformation();
-            System.out.println("envoyé");}
-          else{
-          Notifications.create()
-                    .title("Notification")
-                    .text("votre compte n'a pas été mis à jour").darkStyle()
-                    .showError();
-          }
+            ps.setString(4, u.getAddresse());
+            ps.setString(5,id);
+            int col  =    ps.executeUpdate();
+            if(col >0){
+                Notifications.create()
+                        .title("Notification")
+                        .text("votre compte a été mis à jour").darkStyle()
+                        .showInformation();
+                System.out.println("envoyé");
+                LoginService.getInstance().changeLoggedUser(u);
+            }
+            else{
+                Notifications.create()
+                        .title("Notification")
+                        .text("votre compte n'a pas été mis à jour").darkStyle()
+                        .showError();
+            }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
     
-        public void supprimerJobOwner(String id) {
-                       try {
-            String reqDelete = "delete from jobowner where id=?";
-
+    public void supprimerJobOwner(String id) {
+        try {
+            String reqDelete = "delete from user where id=?";
+            
             PreparedStatement ps = con.prepareStatement(reqDelete);
             ps.setString(1,id);
             ps.executeUpdate();
@@ -213,95 +215,95 @@ public class JobOwnerService {
             ex.printStackTrace();
         }
     }
-          public void changerMDP(String mdp ,String newMdp,String id)
-        {
-            try {
+    public void changerMDP(String mdp ,String newMdp,String id)
+    {
+        try {
             String reqUpdate = "update user set password=? where id=? and password= ?";
             PreparedStatement ps = con.prepareStatement(reqUpdate);
-            ps.setString(1, newMdp);   
+            ps.setString(1, newMdp);
             ps.setString(2,id);
-             ps.setString(3,mdp);
-
-           int col= ps.executeUpdate();
-                    if(col >0){
-             Notifications.create()
-                    .title("Notification")
-                    .text("votre compte a été mis à jour").darkStyle()
-                    .showInformation();
-            System.out.println("envoyé");}
-          else{
-          Notifications.create()
-                    .title("Notification")
-                    .text("mot de passe incorrect").darkStyle()
-                    .showError();
-          }
-             
+            ps.setString(3,mdp);
+            
+            int col= ps.executeUpdate();
+            if(col >0){
+                Notifications.create()
+                        .title("Notification")
+                        .text("votre compte a été mis à jour").darkStyle()
+                        .showInformation();
+                System.out.println("envoyé");}
+            else{
+                Notifications.create()
+                        .title("Notification")
+                        .text("mot de passe incorrect").darkStyle()
+                        .showError();
+            }
+            
         } catch (SQLException ex) {
-             Notifications.create()
+            Notifications.create()
                     .title("Notification")
                     .text("Error").darkStyle()
                     .showError();
-             
+            
             ex.printStackTrace();
         }
-        }
+    }
     
-        
-      public String MD5(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException
-        {
-            byte[] bytesOfMessage = password.getBytes("UTF-8");
-      MessageDigest md = MessageDigest.getInstance("MD5");
-      byte[] thedigest = md.digest(bytesOfMessage);
-      BigInteger bigInt = new BigInteger(1,thedigest);
-      String hashtext = bigInt.toString(16);
-      while(hashtext.length() < 32 ){
+    
+    public String MD5(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException
+    {
+        byte[] bytesOfMessage = password.getBytes("UTF-8");
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] thedigest = md.digest(bytesOfMessage);
+        BigInteger bigInt = new BigInteger(1,thedigest);
+        String hashtext = bigInt.toString(16);
+        while(hashtext.length() < 32 ){
             hashtext = "0"+hashtext;
-       }
-      return hashtext;
         }
-
-   
+        return hashtext;
+    }
     
     
-        public boolean uniqueMail(String mail)
-        { 
-            boolean free=true;
-          try{
-              String reqRec = "select count(*) from user where email=?";
-               PreparedStatement ps = con.prepareStatement(reqRec);
+    
+    
+    public boolean uniqueMail(String mail)
+    {
+        boolean free=true;
+        try{
+            String reqRec = "select count(*) from user where email=?";
+            PreparedStatement ps = con.prepareStatement(reqRec);
             ps.setString(1,mail);
-                      
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){  
-            if(rs.getInt(1)!=0)
-                free=false;
-          }}
             
-          catch (SQLException ex) {
-          ex.printStackTrace();
+            
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                if(rs.getInt(1)!=0)
+                    free=false;
+            }}
+        
+        catch (SQLException ex) {
+            ex.printStackTrace();
         }
-          return free;
-        }
-        public boolean uniquePseudo(String id)
-        { 
-            boolean free=true;
-          try{
-              String reqRec = "select count(*) from user where id=? ";
-               PreparedStatement ps = con.prepareStatement(reqRec);
+        return free;
+    }
+    public boolean uniquePseudo(String id)
+    {
+        boolean free=true;
+        try{
+            String reqRec = "select count(*) from user where id=? ";
+            PreparedStatement ps = con.prepareStatement(reqRec);
             ps.setString(1,id);
-
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()){  
-            if(rs.getInt(1)!=0)
-                free=false;
-          }}
             
-          catch (SQLException ex) {
-          ex.printStackTrace();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                if(rs.getInt(1)!=0)
+                    free=false;
+            }}
+        
+        catch (SQLException ex) {
+            ex.printStackTrace();
         }
-          return free;
-        }
+        return free;
+    }
     
 }
 

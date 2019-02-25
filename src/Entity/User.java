@@ -20,7 +20,20 @@ public class User {
         private String addresse ; 
         private String telephone ; 
         private String type;
+        private int completion_rate ;
 
+    public User(String id, String password, String nom, String prenom, String email, String addresse, String telephone, String type, int completion_rate) {
+        this.id = id;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.addresse = addresse;
+        this.telephone = telephone;
+        this.type = type;
+        this.completion_rate = completion_rate;
+    }
+        
     public User(String id, String password, String nom, String prenom, String email, String addresse, String telephone, String type) {
         this.id = id;
         this.password = password;
@@ -30,6 +43,14 @@ public class User {
         this.addresse = addresse;
         this.telephone = telephone;
         this.type = type;
+    }
+
+    public void setCompletion_rate(int completion_rate) {
+        this.completion_rate = completion_rate;
+    }
+
+    public int getCompletion_rate() {
+        return completion_rate;
     }
 
     public String getType() {

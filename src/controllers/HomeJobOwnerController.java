@@ -31,7 +31,7 @@ import javafx.stage.Stage;
  *
  * @author oXCToo
  */
-public class HomeController implements Initializable {
+public class HomeJobOwnerController implements Initializable {
 
     
 
@@ -39,7 +39,6 @@ public class HomeController implements Initializable {
      private BorderPane root ;
      @FXML  
      private Label nom ;
- private final ObjectProperty<SubMenuController> currentSubMenuController = new SimpleObjectProperty<>(); 
    
  
   public void initialize() {  
@@ -67,14 +66,14 @@ public class HomeController implements Initializable {
 //                             Parent view = (Parent) loader.load();
 //                             root.setCenter(view);
 //                         } catch (IOException ex) {
-//                             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+//                             Logger.getLogger(HomeJobOwnerController.class.getName()).log(Level.SEVERE, null, ex);
 //                         }
 //                     }
 //                 }
 //             });
 //             // ...  
 //         } catch (IOException ex) {
-//             Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+//             Logger.getLogger(HomeJobOwnerController.class.getName()).log(Level.SEVERE, null, ex);
 //         }
      }  
   
@@ -84,17 +83,13 @@ public class HomeController implements Initializable {
   public void ProfilAction(ActionEvent event) throws IOException{
       User cu = LoginService.getInstance().getLoggedUser();
       
-      if(cu.getType().equals("freelance")){
-          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/ProfilFreelance.fxml"));
-          Parent view = (Parent) loader.load();
-          root.setCenter(view);
-      }
-      else  if(cu.getType().equals("jobowner")){
+    
+     
           FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Profil.fxml"));
           Parent view = (Parent) loader.load();
           root.setCenter(view);
           
-      }
+      
       
       
       

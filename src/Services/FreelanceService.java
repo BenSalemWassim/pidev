@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.controlsfx.control.Notifications;
 import utils.ConnectionUtil;
 
@@ -153,22 +155,22 @@ public class FreelanceService {
     
     
     public List<Freelance> afficherFreelancers() {
-        List<Freelance> js = new ArrayList<>();
+        ArrayList<Freelance> js = new ArrayList<>();
         try {
-            String req = "select id,nom,prenom,password,email,telephone,addresse, secteur from freelance";
+            String req = "select id,nom,prenom,password,email,telephone,addresse, secteur from user where type='freelance'";
             PreparedStatement ps = con.prepareStatement(req);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
                 Freelance jol = new Freelance();
                 jol.setId(result.getString(1));
-                jol.setPassword(result.getString(2));
-                jol.setNom(result.getString(3));
-                jol.setPrenom(result.getString(4));
+                jol.setNom(result.getString(2));
+                                jol.setPrenom(result.getString(3));
+               jol.setPassword(result.getString(4));
                 jol.setEmail(result.getString(5));
-                jol.setAddresse(result.getString(6));
-                jol.setTelephone(result.getString(7));
-                jol.setTelephone(result.getString(8));
-                                        jol.setType(result.getString(9));
+                jol.setTelephone(result.getString(6));
+                jol.setAddresse(result.getString(7));
+                
+                jol.setSecteur(result.getString(8));
 
                 js.add(jol);
             }
@@ -203,7 +205,9 @@ public class FreelanceService {
                     .title("Notification")
                     .text("votre compte a été mis à jour").darkStyle()
                     .showInformation();
-            System.out.println("envoyé");}
+            System.out.println("envoyé");
+                           LoginService.getInstance().changeLoggedUser(u);
+                    }
           else{
           Notifications.create()
                     .title("Notification")
@@ -219,18 +223,36 @@ public class FreelanceService {
         }
     }
     
-    public void supprimerFreelance (String id) {
+    public String supprimerFreelance (String id) {
         try {
             String reqDelete = "delete from user where id=?";
             
             PreparedStatement ps = con.prepareStatement(reqDelete);
             ps.setString(1,id);
-            ps.executeUpdate();
-            
+            int col = ps.executeUpdate();
+            if(col >0){
+             Notifications.create()
+                    .title("Notification")
+                    .text("le compte a été supprimé").darkStyle()
+                    .showInformation();
             System.out.println("envoyé");
+                    return("ok");
+                    
+                    }
+          else{
+          Notifications.create()
+                    .title("Notification")
+                    .text("le compte n'a pas  supprimé").darkStyle()
+                    .showError();
+                              return("nok");
+
+          }
+             
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+                                      return("nok");
+
     }
     public void changerMDP(String mdp ,String newMdp,String id)
     {
@@ -247,7 +269,10 @@ public class FreelanceService {
                     .title("Notification")
                     .text("votre compte a été mis à jour").darkStyle()
                     .showInformation();
-            System.out.println("envoyé");}
+            System.out.println("envoyé");
+                    
+                    
+                    }
           else{
           Notifications.create()
                     .title("Notification")

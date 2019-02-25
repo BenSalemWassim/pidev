@@ -5,6 +5,7 @@
 */
 package Services;
 
+import Entity.Admin;
 import Entity.Freelance;
 import Entity.JobOwner;
 import Entity.User;
@@ -84,7 +85,7 @@ public String AdminlogIn(String id ,String email ,String password) {
         con = ConnectionUtil.getInstance();
         
         //query
-        String sql = "SELECT * FROM admin Where ( id = ? or email = ? ) and password = ?  ";
+        String sql = "SELECT * FROM user Where ( id = ? or email = ? ) and password = ? and type = 'admin' ";
         
         try {
             preparedStatement = con.prepareStatement(sql);
@@ -96,7 +97,7 @@ public String AdminlogIn(String id ,String email ,String password) {
             resultSet = preparedStatement.executeQuery();
             
             if (resultSet.next()) {
-                LoginService.loggedUser = new User(resultSet.getString("id"),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6), resultSet.getString(7),  resultSet.getString(8) );
+      LoginService.loggedUser = new Admin(resultSet.getString("id"),resultSet.getString("password"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("email"),resultSet.getString("addresse"), resultSet.getString("telephone"),resultSet.getString("type"));
                 System.out.println(loggedUser) ;
                 return "Success";
             } else {
@@ -135,36 +136,16 @@ public String AdminlogIn(String id ,String email ,String password) {
     }
 
     
-
+ public void changeLoggedUser(User user){
+        loggedUser = user;
+    }
+ 
+ 
     public void userLogout(){
         loggedUser = null;
     }
 
-    public void gotoProfile() {
-        try {
-            replaceSceneContent("/fxml/OnBoard.fxml");
-        } catch (Exception ex) {
-            Logger.getLogger(LoginService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
-    private void gotoLogin() {
-        try {
-            replaceSceneContent("/fxml/Login.fxml");
-        } catch (Exception ex) {
-            Logger.getLogger(LoginService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void replaceSceneContent(String fxml) throws Exception {
-        Parent page = (Parent) FXMLLoader.load(LoginService.class.getResource(fxml), null, new JavaFXBuilderFactory());
-        Scene scene = stage.getScene();
-     
-            stage.getScene().setRoot(page);
-        
-        stage.sizeToScene();
-        return ;
-    }
     
        public String MD5(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException
     {

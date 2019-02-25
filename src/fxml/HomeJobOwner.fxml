@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="stackpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeJobOwnerController">
+   <children>
+      <BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0">
+         <left>
+            <VBox prefHeight="700.0" prefWidth="163.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="ProfilAction" onAction="#ProfilAction" prefHeight="59.0" prefWidth="170.0" text="Profil" textFill="#f2eded" />
+               </children>
+            </VBox>
+         </left>
+         <top>
+            <HBox prefHeight="54.0" prefWidth="1000.0" style="-fx-background-color: #f2eded;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="nom" prefHeight="55.0" prefWidth="163.0" style="-fx-background-color: #40465E;" text="Label" textFill="#f2eded">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <JFXButton onAction="#deco" text="Déconnecxion">
+                     <HBox.margin>
+                        <Insets left="695.0" right="20.0" top="15.0" />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </top>
+      </BorderPane>
+   </children>
+</StackPane>

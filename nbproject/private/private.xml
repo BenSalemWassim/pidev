@@ -3,30 +3,32 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/UserSubMenuController.java</file>
             <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Entity/JobOwner.java</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/fxml/Home.fxml</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/SignUpController.java</file>
             <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Entity/Freelance.java</file>
             <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/fxml/ProfilFreelance.fxml</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/OnBoardController.java</file>
             <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/utils/ConnectionUtil.java</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Entity/Admin.java</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/HomeController.java</file>
             <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/ProfilJobOwnerController.java</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Services/LoginService.java</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Services/AdminService.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/fxml/HomeFreelance.fxml</file>
             <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Services/FreelanceService.java</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/SubMenuController.java</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/SignUpJobOwnerController.java</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/fxml/userSubMenu.fxml</file>
             <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/SignUpFreelanceController.java</file>
             <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/fxml/Login.fxml</file>
             <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Entity/User.java</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/fxml/Profil.fxml</file>
-            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Services/JobOwnerService.java</file>
             <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/ProfilFreelanceController.java</file>
             <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/LoginController.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/HomeFreelanceController.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/SignUpController.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Entity/Admin.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Services/LoginService.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Services/AdminService.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/SignUpJobOwnerController.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/HomeAdminController.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/AdminListFreelanceController.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/fxml/Profil.fxml</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/Services/JobOwnerService.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/fxml/AdminListFreelance.fxml</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/controllers/HomeJobOwnerController.java</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/fxml/HomeJobOwner.fxml</file>
+            <file>file:/C:/Users/wassim/Documents/NetBeansProjects/Pidev/src/fxml/HomeAdmin.fxml</file>
         </group>
     </open-files>
 </project-private>

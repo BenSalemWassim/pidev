@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<StackPane fx:id="stackpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="820.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminListFreelanceController">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F2EDED;">
+         <children>
+            <TableView fx:id="tableview" prefHeight="500.0" prefWidth="373.0">
+              <columns>
+                <TableColumn fx:id="idf" prefWidth="115.0" text="Pseudo" />
+                <TableColumn fx:id="emailf" prefWidth="123.0" text="Email" />
+                  <TableColumn fx:id="secteurf" minWidth="4.0" prefWidth="134.0" text="Secteur" />
+              </columns>
+            </TableView>
+            <Label fx:id="pseudo" layoutX="410.0" layoutY="33.0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label fx:id="nom" layoutX="433.0" layoutY="108.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="prenom" layoutX="433.0" layoutY="151.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="email" layoutX="433.0" layoutY="194.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="adresse" layoutX="433.0" layoutY="242.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="tel" layoutX="433.0" layoutY="288.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="secteur" layoutX="433.0" layoutY="335.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXButton fx:id="btndel" layoutX="715.0" layoutY="446.0" onAction="#deletef" text="Supprimer" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

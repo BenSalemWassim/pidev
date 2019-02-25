@@ -5,6 +5,7 @@ package controllers;
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
+import Entity.User;
 import Services.JobOwnerService;
 import Services.LoginService;
 import com.jfoenix.controls.JFXButton;
@@ -84,7 +85,7 @@ public class LoginController implements Initializable {
                     Stage stage = (Stage) node.getScene().getWindow();
                     //stage.setMaximized(true);
                     stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/OnBoard.fxml")));
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/HomeAdmin.fxml")));
                     stage.setScene(scene);
                     stage.show();
                     
@@ -100,13 +101,29 @@ public class LoginController implements Initializable {
                 try {
                     
                     //add you loading or delays - ;-)
-                    Node node = (Node) event.getSource();
+                  
+                   
+                      
+        
+                                    User cu = LoginService.getInstance().getLoggedUser();
+
+                    if(cu.getType().equals("freelance")){
+                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/HomeFreelance.fxml")));
+                      Node node = (Node) event.getSource();
                     Stage stage = (Stage) node.getScene().getWindow();
                     //stage.setMaximized(true);
                     stage.close();
-                    Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/Home.fxml")));
-                    stage.setScene(scene);
+                     stage.setScene(scene);
                     stage.show();
+                    }else if(cu.getType().equals("jobowner")){
+                                        Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/HomeJobOwner.fxml")));
+                                          Node node = (Node) event.getSource();
+                    Stage stage = (Stage) node.getScene().getWindow();
+                    //stage.setMaximized(true);
+                    stage.close();
+                 stage.setScene(scene);
+                    stage.show();
+                    }
                     
                 } catch (IOException ex) {
                     System.err.println(ex.getMessage());
@@ -233,6 +250,14 @@ public class LoginController implements Initializable {
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
         }
+    }
+    
+    
+    public void mdpo(ActionEvent event) throws IOException{
+    
+    Parent root = FXMLLoader.load(getClass().getResource("/fxml/MdpOublie.fxml"));
+            
+            stackpane.getChildren().add(root);
     }
 }
 

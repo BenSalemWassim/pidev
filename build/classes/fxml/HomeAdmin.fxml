@@ -16,6 +16,7 @@
             <VBox prefHeight="700.0" prefWidth="163.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER">
                <children>
                   <JFXButton fx:id="Freelancers" onAction="#Listf" prefHeight="59.0" prefWidth="170.0" text="Freelancers" textFill="#f2eded" />
+                  <JFXButton fx:id="jobowners" layoutX="10.0" layoutY="10.0" onAction="#Listj" prefHeight="59.0" prefWidth="170.0" text="JobOwners" textFill="#f2eded" />
                </children>
             </VBox>
          </left>

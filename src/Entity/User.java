@@ -20,7 +20,24 @@ public class User {
         private String addresse ; 
         private String telephone ; 
         private String type;
+        private String photo;
+                
         private int completion_rate ;
+
+   
+
+    public User(String id, String password, String nom, String prenom, String email, String addresse, String telephone, String type, String photo, int completion_rate) {
+        this.id = id;
+        this.password = password;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.addresse = addresse;
+        this.telephone = telephone;
+        this.type = type;
+        this.photo = photo;
+        this.completion_rate = completion_rate;
+    }
 
     public User(String id, String password, String nom, String prenom, String email, String addresse, String telephone, String type, int completion_rate) {
         this.id = id;
@@ -147,5 +164,11 @@ public class User {
     public String getTelephone() {
         return telephone;
     }
+ public String getPhoto() {
+        return photo;
+    }
 
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
 }

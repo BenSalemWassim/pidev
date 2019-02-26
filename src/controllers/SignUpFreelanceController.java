@@ -287,7 +287,7 @@ public class SignUpFreelanceController implements Initializable {
                                     LoginService s = new LoginService();
                                     s.getInstance().changeLoggedUser(newj);
                                     MailingService m = new MailingService();
-                                    m.envoi(newj.getEmail(), newj.getNom());
+                                    m.envoi(newj.getEmail(), "Bienvenue "+ newj.getNom() +" sur SmartStart");
                                     Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/HomeFreelance.fxml")));
                                     Stage stage = (Stage) dad.getScene().getWindow();
                                     

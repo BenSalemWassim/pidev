@@ -56,4 +56,11 @@ public class HomeAdminController implements Initializable {
         Parent view = (Parent) loader.load();
         root.setCenter(view);
     }
+     @FXML
+    public void Listj(ActionEvent event) throws IOException{
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/AdminListJobOwner.fxml"));
+        Parent view = (Parent) loader.load();
+        root.setCenter(view);
+    }
 }

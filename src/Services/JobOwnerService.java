@@ -147,18 +147,20 @@ public class JobOwnerService {
     public List<JobOwner> afficherJobOwners() {
         List<JobOwner> js = new ArrayList<>();
         try {
-            String req = "select id,nom,prenom,password,email,telephone,addresse from jobowner";
+            String req = "select id,nom,prenom,password,email,telephone,addresse, secteur ,type from user where type='jobowner'";
             PreparedStatement ps = con.prepareStatement(req);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
                 JobOwner jol = new JobOwner();
                 jol.setId(result.getString(1));
-                jol.setPassword(result.getString(2));
-                jol.setNom(result.getString(3));
-                jol.setPrenom(result.getString(4));
-                jol.setEmail(result.getString(5));
-                jol.setAddresse(result.getString(6));
-                jol.setTelephone(result.getString(7));
+                jol.setPassword(result.getString("password"));
+                jol.setNom(result.getString("nom"));
+                jol.setPrenom(result.getString("prenom"));
+                jol.setEmail(result.getString("email"));
+                jol.setAddresse(result.getString("addresse"));
+                jol.setTelephone(result.getString("telephone"));
+                jol.setType(result.getString("type"));
+
                 js.add(jol);
             }
             
@@ -201,20 +203,39 @@ public class JobOwnerService {
             ex.printStackTrace();
         }
     }
-    
-    public void supprimerJobOwner(String id) {
+    public String supprimerJobOwner (String id) {
         try {
             String reqDelete = "delete from user where id=?";
             
             PreparedStatement ps = con.prepareStatement(reqDelete);
             ps.setString(1,id);
-            ps.executeUpdate();
-            
+            int col = ps.executeUpdate();
+            if(col >0){
+             Notifications.create()
+                    .title("Notification")
+                    .text("le compte a été supprimé").darkStyle()
+                    .showInformation();
             System.out.println("envoyé");
+                    return("ok");
+                    
+                    }
+          else{
+          Notifications.create()
+                    .title("Notification")
+                    .text("le compte n'a pas  supprimé").darkStyle()
+                    .showError();
+                              return("nok");
+
+          }
+             
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+                                      return("nok");
+
     }
+    
+ 
     public void changerMDP(String mdp ,String newMdp,String id)
     {
         try {

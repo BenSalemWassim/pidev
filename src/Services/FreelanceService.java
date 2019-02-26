@@ -157,7 +157,7 @@ public class FreelanceService {
     public List<Freelance> afficherFreelancers() {
         ArrayList<Freelance> js = new ArrayList<>();
         try {
-            String req = "select id,nom,prenom,password,email,telephone,addresse, secteur from user where type='freelance'";
+            String req = "select id,nom,prenom,password,email,telephone,addresse, secteur ,type from user where type='freelance'";
             PreparedStatement ps = con.prepareStatement(req);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
@@ -171,6 +171,7 @@ public class FreelanceService {
                 jol.setAddresse(result.getString(7));
                 
                 jol.setSecteur(result.getString(8));
+                jol.setType(result.getString(9));
 
                 js.add(jol);
             }

@@ -22,7 +22,7 @@ public class MailingService {
 
     public MailingService() {
     }
-      public void  envoi (String too, String nom){
+      public void  envoi (String too,String messageTextv){
   
    try{
             String host ="smtp.gmail.com" ;
@@ -31,7 +31,7 @@ public class MailingService {
             String to = too;
             String from = "smartstart.1.ss@gmail.com";
             String subject = "SmartStart";
-            String messageText = "Bienvenue "+nom+" sur SmartStart ";
+            String messageText = messageTextv ;
             boolean sessionDebug = false;
 
             Properties props = System.getProperties();

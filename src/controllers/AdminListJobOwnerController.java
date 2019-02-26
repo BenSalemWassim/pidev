@@ -1,12 +1,14 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controllers;
 
 import Entity.Freelance;
+import Entity.JobOwner;
 import Services.FreelanceService;
+import Services.JobOwnerService;
 import Services.MailingService;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
@@ -30,27 +32,21 @@ import javafx.scene.layout.StackPane;
  *
  * @author wassim
  */
-public class AdminListFreelanceController implements Initializable {
-    
-    /**
-     * Initializes the controller class.
-     */
-    
+public class AdminListJobOwnerController implements Initializable {
+
     @FXML
-            StackPane stackpane;
+    StackPane stackpane;
     
     @FXML
-    private TableView<Freelance> tableview;
+    private TableView<JobOwner> tableview;
     @FXML
-    private TableColumn<Freelance, String> idf;
+    private TableColumn<JobOwner, String> idf;
     @FXML
-    private TableColumn<Freelance, String> emailf;
-    @FXML
-    private TableColumn<Freelance, String> secteurf;
+    private TableColumn<JobOwner, String> emailf;
+    
     @FXML
     private Label tel;
-    @FXML
-    private Label secteur;
+    
     @FXML
     private Label adresse;
     @FXML
@@ -67,14 +63,13 @@ public class AdminListFreelanceController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         btndel.setVisible(false);
-        FreelanceService fs = new FreelanceService();
-        ArrayList<Freelance> list = (ArrayList<Freelance>) fs.afficherFreelancers();
-        ObservableList<Freelance> frs=FXCollections.observableArrayList(list);
+        JobOwnerService fs = new JobOwnerService();
+        ArrayList<JobOwner> list = (ArrayList<JobOwner>) fs.afficherJobOwners();
+        ObservableList<JobOwner> frs=FXCollections.observableArrayList(list);
         
         tableview.setItems(frs);
         idf.setCellValueFactory(new PropertyValueFactory<>("id"));
         emailf.setCellValueFactory(new PropertyValueFactory<>("email"));
-        secteurf.setCellValueFactory(new PropertyValueFactory<>("secteur"));
         
         tableview.setOnMousePressed( new EventHandler<MouseEvent>(){
             
@@ -83,13 +78,13 @@ public class AdminListFreelanceController implements Initializable {
                 
                         btndel.setVisible(true);
 
+              
                 pseudo.setText("Pseudo "+tableview.getSelectionModel().getSelectedItem().getId());
                 nom.setText("Nom "+tableview.getSelectionModel().getSelectedItem().getNom());
                 prenom.setText("Prenom "+tableview.getSelectionModel().getSelectedItem().getPrenom());
                 email.setText("Email "+tableview.getSelectionModel().getSelectedItem().getEmail());
                 adresse.setText("Adresse "+tableview.getSelectionModel().getSelectedItem().getAddresse());
                 tel.setText("Telephone "+tableview.getSelectionModel().getSelectedItem().getTelephone());
-                secteur.setText("Secteur "+tableview.getSelectionModel().getSelectedItem().getSecteur());
 
                
 
@@ -104,19 +99,17 @@ public class AdminListFreelanceController implements Initializable {
     }
      @FXML
         public void deletef(ActionEvent event){
-            FreelanceService fs = new FreelanceService() ;
-           String r= fs.supprimerFreelance(tableview.getSelectionModel().getSelectedItem().getId());
+            JobOwnerService fs = new JobOwnerService() ;
+           String r= fs.supprimerJobOwner(tableview.getSelectionModel().getSelectedItem().getId());
            if(r.equalsIgnoreCase("ok")){
                MailingService m = new MailingService();                                                 
             m.envoi(tableview.getSelectionModel().getSelectedItem().getEmail(), "Nous sommes désolé "+ tableview.getSelectionModel().getSelectedItem().getNom() +" votre compte a été supprimé par l'administrateur ");
 
-           ObservableList<Freelance> freelanceSelected,allfreelancers;
-           allfreelancers= tableview.getItems();
-           freelanceSelected= tableview.getSelectionModel().getSelectedItems();
-           freelanceSelected.forEach(allfreelancers::remove);}
+           ObservableList<JobOwner> JobOwnerSelected,allJobOwner;
+           allJobOwner= tableview.getItems();
+           JobOwnerSelected= tableview.getSelectionModel().getSelectedItems();
+           JobOwnerSelected.forEach(allJobOwner::remove);}
             
             
     }
-        
-    
 }

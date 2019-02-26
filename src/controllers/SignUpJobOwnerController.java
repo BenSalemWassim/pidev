@@ -9,9 +9,13 @@ import Entity.JobOwner;
 import Services.JobOwnerService;
 import Services.LoginService;
 import Services.MailingService;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -24,13 +28,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
 
 /**
  * FXML Controller class
@@ -42,6 +50,11 @@ public class SignUpJobOwnerController implements Initializable {
     /**
      * Initializes the controller class.
      */
+     @FXML
+    private ImageView imagev;
+
+    @FXML
+    private JFXButton btnphoto;
     @FXML
             JFXTextField txtNom;
     @FXML
@@ -119,7 +132,7 @@ public class SignUpJobOwnerController implements Initializable {
             LoginService s = new LoginService();
             s.getInstance().changeLoggedUser(newj);
             MailingService m = new MailingService();
-            m.envoi(newj.getEmail(), newj.getNom());
+            m.envoi(newj.getEmail(), "Bienvenue "+ newj.getNom() +" sur SmartStart");
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/fxml/HomeJobOwner.fxml")));
             Stage stage = (Stage) stackpane.getScene().getWindow();
             
@@ -160,4 +173,58 @@ public class SignUpJobOwnerController implements Initializable {
         
         stackpane.getChildren().setAll(root);
     }
+     @FXML
+    void handleButtonAction(ActionEvent event) {
+
+ String img="";
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        File file=fileChooser.showOpenDialog(null);
+        if (file != null) {
+            Image image = new Image(file.toURI().toString());
+            img=file.toURI().toString();
+            imagev.setImage(image);
+        }
+
+        String server = "127.0.0.1";
+        int port = 21;
+        String user = "root";
+        String pass = "root";
+
+        FTPClient ftpClient = new FTPClient();
+        try {
+            
+            ftpClient.connect(server, port);
+            ftpClient.login(user, pass);
+            ftpClient.enterLocalPassiveMode();
+            img=img.substring(6);
+            File firstLocalFile = new File(img);
+            String firstRemoteFile = file.getName();
+             ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+ 
+            InputStream inputStream = new FileInputStream(firstLocalFile);
+                      System.out.println("Start uploading first file");
+
+            boolean done = ftpClient.storeFile(firstRemoteFile, inputStream);
+            
+            inputStream.close();
+            
+            if (done) {
+                System.out.println("The first file is uploaded successfully.");
+            }
+
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (ftpClient.isConnected()) {
+                    ftpClient.logout();
+                    ftpClient.disconnect();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }    }
 }

@@ -64,7 +64,7 @@ public class JobOwnerService {
         
         if(mailTest && pseudoTest){
             try {
-                String sql = "INSERT INTO user (id, password, nom, prenom,email,addresse,telephone,type) VALUES (?, ?,?, ?, ?,?,?,?)";
+                String sql = "INSERT INTO user (id, password, nom, prenom,email,addresse,telephone,type,photo) VALUES (?, ?,?, ?, ?,?,?,?,?)";
                 
                 PreparedStatement statement = con.prepareStatement(sql);
                 statement.setString(1, jo.getId());
@@ -75,7 +75,8 @@ public class JobOwnerService {
                 statement.setString(6, jo.getAddresse());
                 statement.setString(7, jo.getTelephone());
                 statement.setString(8,"jobowner");
-                
+                statement.setString(9,jo.getPhoto());
+
                 int rowsInserted;
                 
                 rowsInserted = statement.executeUpdate();
@@ -147,7 +148,7 @@ public class JobOwnerService {
     public List<JobOwner> afficherJobOwners() {
         List<JobOwner> js = new ArrayList<>();
         try {
-            String req = "select id,nom,prenom,password,email,telephone,addresse, secteur ,type from user where type='jobowner'";
+            String req = "select id,nom,prenom,password,email,telephone,addresse, secteur ,type , photo from user where type='jobowner'";
             PreparedStatement ps = con.prepareStatement(req);
             ResultSet result = ps.executeQuery();
             while (result.next()) {
@@ -160,6 +161,7 @@ public class JobOwnerService {
                 jol.setAddresse(result.getString("addresse"));
                 jol.setTelephone(result.getString("telephone"));
                 jol.setType(result.getString("type"));
+                jol.setPhoto(result.getString("photo"));
 
                 js.add(jol);
             }
@@ -177,13 +179,15 @@ public class JobOwnerService {
         try {
             String reqUpdate = "update user set"
                     + " nom=?,"
-                    + "prenom=?,  telephone=? ,addresse=?  where id=?";
+                    + "prenom=?,  telephone=? ,addresse=?  , photo= ? where id=?";
             PreparedStatement ps = con.prepareStatement(reqUpdate);
             ps.setString(1, u.getNom());
             ps.setString(2, u.getPrenom());
             ps.setString(3, u.getTelephone());
             ps.setString(4, u.getAddresse());
-            ps.setString(5,id);
+                        ps.setString(5, u.getPhoto());
+
+            ps.setString(6,id);
             int col  =    ps.executeUpdate();
             if(col >0){
                 Notifications.create()

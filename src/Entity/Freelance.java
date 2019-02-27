@@ -17,8 +17,8 @@ public class Freelance extends User {
     
     String secteur ;
 
-    public Freelance(String secteur, String id, String password, String nom, String prenom, String email, String addresse, String telephone, String type) {
-        super(id, password, nom, prenom, email, addresse, telephone, type);
+    public Freelance(String secteur, String id, String password, String nom, String prenom, String email, String addresse, String telephone, String type, String photo) {
+        super(id, password, nom, prenom, email, addresse, telephone, type, photo);
         this.secteur = secteur;
     }
 

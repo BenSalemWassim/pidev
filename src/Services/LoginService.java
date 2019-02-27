@@ -56,10 +56,10 @@ public class LoginService {
             
             if (resultSet.next()) {
                 if(resultSet.getString("type").equals("freelance")){
-      LoginService.loggedUser = new Freelance(resultSet.getString("secteur"),resultSet.getString("id"),resultSet.getString("password"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("email"),resultSet.getString("addresse"), resultSet.getString("telephone"),resultSet.getString("type"));
+      LoginService.loggedUser = new Freelance(resultSet.getString("secteur"),resultSet.getString("id"),resultSet.getString("password"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("email"),resultSet.getString("addresse"), resultSet.getString("telephone"),resultSet.getString("type"),resultSet.getString("photo"));
 
                 }else  if(resultSet.getString("type").equals("jobowner")){
-      LoginService.loggedUser = new JobOwner(resultSet.getString("id"),resultSet.getString("password"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("email"),resultSet.getString("addresse"), resultSet.getString("telephone"),resultSet.getString("type"));
+      LoginService.loggedUser = new JobOwner(resultSet.getString("id"),resultSet.getString("password"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("email"),resultSet.getString("addresse"), resultSet.getString("telephone"),resultSet.getString("type"),resultSet.getString("photo"));
                 }
                 System.out.println(loggedUser) ;
                 return "Success";

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.paint.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.*?>
@@ -23,25 +24,27 @@
          <children>
             <Pane layoutX="155.0" prefHeight="633.0" prefWidth="532.0" style="-fx-background-color: #ffff;">
                <children>
-                  <JFXButton fx:id="aa" layoutX="434.0" layoutY="388.0" onAction="#ButtonAction" text="modifier" />
-                  <Label fx:id="title" layoutX="229.0" layoutY="27.0" prefHeight="17.0" prefWidth="75.0" text="JOB OWNER">
+                  <JFXButton fx:id="aa" layoutX="199.0" layoutY="413.0" onAction="#ButtonAction" text="modifier" />
+                  <Label fx:id="title" layoutX="111.0" layoutY="29.0" prefHeight="17.0" prefWidth="75.0" text="JOB OWNER">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
                   <Separator layoutX="42.0" layoutY="586.0" prefHeight="7.0" prefWidth="435.0" />
-                  <JFXTextField fx:id="txtNom" focusColor="BLACK" labelFloat="true" layoutX="141.0" layoutY="81.0" prefHeight="25.0" prefWidth="226.0" promptText="Nom" />
-                  <JFXTextField fx:id="txtPrenom" focusColor="BLACK" labelFloat="true" layoutX="144.0" layoutY="150.0" prefHeight="25.0" prefWidth="226.0" promptText="Prenom" />
-                  <JFXTextField fx:id="txtAddresse" focusColor="BLACK" labelFloat="true" layoutX="144.0" layoutY="259.0" prefHeight="25.0" prefWidth="226.0" promptText="Addresse" />
-                  <JFXTextField fx:id="txttelephone" focusColor="BLACK" labelFloat="true" layoutX="146.0" layoutY="325.0" prefHeight="25.0" prefWidth="226.0" promptText="Téléphone" />
+                  <JFXTextField fx:id="txtNom" focusColor="BLACK" labelFloat="true" layoutX="23.0" layoutY="83.0" prefHeight="25.0" prefWidth="226.0" promptText="Nom" />
+                  <JFXTextField fx:id="txtPrenom" focusColor="BLACK" labelFloat="true" layoutX="26.0" layoutY="152.0" prefHeight="25.0" prefWidth="226.0" promptText="Prenom" />
+                  <JFXTextField fx:id="txtAddresse" focusColor="BLACK" labelFloat="true" layoutX="25.0" layoutY="213.0" prefHeight="25.0" prefWidth="226.0" promptText="Addresse" />
+                  <JFXTextField fx:id="txttelephone" focusColor="BLACK" labelFloat="true" layoutX="27.0" layoutY="279.0" prefHeight="25.0" prefWidth="226.0" promptText="Téléphone" />
                   <JFXPasswordField fx:id="password" focusColor="BLACK" labelFloat="true" layoutX="144.0" layoutY="466.0" prefHeight="25.0" prefWidth="226.0" promptText="Mot de passe" />
                   <JFXPasswordField fx:id="password1" focusColor="BLACK" labelFloat="true" layoutX="145.0" layoutY="516.0" prefHeight="25.0" prefWidth="226.0" promptText="Nouveau mot de passe" />
-                  <Label fx:id="labNotif" layoutX="89.0" layoutY="420.0" prefHeight="17.0" prefWidth="339.0" />
+                  <Label fx:id="labNotif" layoutX="14.0" layoutY="382.0" prefHeight="17.0" prefWidth="339.0" />
                   <Separator layoutX="42.0" layoutY="445.0" prefHeight="7.0" prefWidth="435.0" />
                   <JFXButton fx:id="aa1" layoutX="434.0" layoutY="547.0" onAction="#ButtonAction1" text="modifier" />
                   <Label fx:id="labNotif1" layoutX="60.0" layoutY="559.0" prefHeight="17.0" prefWidth="339.0" />
-                  <Label fx:id="mail" layoutX="193.0" layoutY="213.0" prefHeight="17.0" prefWidth="184.0" />
-                  <Label layoutX="142.0" layoutY="213.0" text="Email" />
+                  <Label fx:id="mail" layoutX="76.0" layoutY="353.0" prefHeight="17.0" prefWidth="184.0" />
+                  <Label layoutX="28.0" layoutY="353.0" text="Email" />
+                  <ImageView fx:id="imagev" fitHeight="150.0" fitWidth="200.0" layoutX="316.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" />
+                  <JFXButton layoutX="362.0" layoutY="254.0" onAction="#changerphoto" text="Changer la photo" />
                </children>
             </Pane>
          </children>

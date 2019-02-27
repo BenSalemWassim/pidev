@@ -11,7 +11,10 @@ import Services.FreelanceService;
 import Services.JobOwnerService;
 import Services.MailingService;
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -24,6 +27,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 
@@ -36,7 +41,8 @@ public class AdminListJobOwnerController implements Initializable {
 
     @FXML
     StackPane stackpane;
-    
+     @FXML
+    private ImageView imagev;
     @FXML
     private TableView<JobOwner> tableview;
     @FXML
@@ -75,7 +81,7 @@ public class AdminListJobOwnerController implements Initializable {
             
             @Override
             public void handle (MouseEvent event){
-                
+                      imagev.setImage(null);
                         btndel.setVisible(true);
 
               
@@ -85,8 +91,9 @@ public class AdminListJobOwnerController implements Initializable {
                 email.setText("Email "+tableview.getSelectionModel().getSelectedItem().getEmail());
                 adresse.setText("Adresse "+tableview.getSelectionModel().getSelectedItem().getAddresse());
                 tel.setText("Telephone "+tableview.getSelectionModel().getSelectedItem().getTelephone());
-
-               
+                     
+               if(tableview.getSelectionModel().getSelectedItem().getPhoto() != null)
+                   load(tableview.getSelectionModel().getSelectedItem().getPhoto()) ;
 
 
 
@@ -96,6 +103,21 @@ public class AdminListJobOwnerController implements Initializable {
         
        
         
+    }
+     void load(String photo) {
+        
+
+		URL url = null;
+        URLConnection urlc = null;
+        try {
+            url = new URL("ftp://root:root@127.0.0.1/"+photo);
+            urlc = url.openConnection();
+            InputStream is = urlc.getInputStream();
+            imagev.setImage(new Image(is));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
      @FXML
         public void deletef(ActionEvent event){

@@ -11,8 +11,9 @@ package Entity;
  */
 public class JobOwner extends User {
 
-    public JobOwner(String id, String password, String nom, String prenom, String email, String addresse, String telephone, String type) {
-        super(id, password, nom, prenom, email, addresse, telephone, type);
+  
+    public JobOwner(String id, String password, String nom, String prenom, String email, String addresse, String telephone, String type, String photo) {
+        super(id, password, nom, prenom, email, addresse, telephone, type, photo);
     }
 
  

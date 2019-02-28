@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ChatController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ChatController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -16,7 +16,6 @@
             <JFXButton fx:id="sends" layoutX="259.0" layoutY="343.0" onAction="#send" ripplerFill="#ad2727" text="send" />
             <JFXTextArea fx:id="messages" layoutX="75.0" layoutY="142.0" />
             <JFXTextField fx:id="text" layoutX="75.0" layoutY="330.0" />
-            <JFXButton fx:id="ter" layoutX="523.0" layoutY="347.0" onAction="#terminer" text="terminer" />
          </children>
       </AnchorPane>
    </children>

@@ -5,6 +5,7 @@
 */
 package Services;
 
+import Entity.Interfaces.FreelanceServiceInterface;
 import Entity.Freelance;
 import Entity.JobOwner;
 import Entity.User;
@@ -31,7 +32,7 @@ import utils.ConnectionUtil;
  *
  * @author wassim
  */
-public class FreelanceService {
+public class FreelanceService implements FreelanceServiceInterface {
     Connection con = null;
     
     
@@ -42,6 +43,7 @@ public class FreelanceService {
     
     
     
+    @Override
     public String AddFreelance(Freelance jo) throws SQLException {
         
         Connection con = null;
@@ -101,6 +103,7 @@ public class FreelanceService {
         return "ok";
         
     }
+    @Override
     public Freelance GetFreelanceById (Freelance jo) throws SQLException {
         
         String sql = "select * from freelance where id='"+jo.getId()+"'";
@@ -127,6 +130,7 @@ public class FreelanceService {
         }
         return jol ;
     }
+    @Override
     public Freelance GetFreelanceByEmail (Freelance jo) throws SQLException {
         
         String sql = "select * from freelance where email='"+jo.getEmail()+"'";
@@ -155,6 +159,7 @@ public class FreelanceService {
     }
     
     
+    @Override
     public List<Freelance> afficherFreelancers() {
         ArrayList<Freelance> js = new ArrayList<>();
         try {
@@ -187,6 +192,7 @@ public class FreelanceService {
     
     
     
+    @Override
     public void modifierFreelance(Freelance u,String id) {
         try {
             String reqUpdate = "update user set"
@@ -227,6 +233,7 @@ public class FreelanceService {
         }
     }
     
+    @Override
     public String supprimerFreelance (String id) {
         try {
             String reqDelete = "delete from user where id=?";
@@ -258,6 +265,7 @@ public class FreelanceService {
                                       return("nok");
 
     }
+    @Override
     public void changerMDP(String mdp ,String newMdp,String id)
     {
         try {
@@ -294,6 +302,7 @@ public class FreelanceService {
     }
     
     
+    @Override
     public String MD5(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException
     {
         byte[] bytesOfMessage = password.getBytes("UTF-8");
@@ -308,6 +317,7 @@ public class FreelanceService {
     }
     
   
+    @Override
     public boolean uniqueMail(String mail)
     {
         boolean free=true;
@@ -328,6 +338,7 @@ public class FreelanceService {
         }
         return free;
     }
+    @Override
     public boolean uniquePseudo(String id)
     {
         boolean free=true;

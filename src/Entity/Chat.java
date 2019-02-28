@@ -16,8 +16,17 @@ public class Chat {
     String ip ;
 String send ;
 
+    public Chat(String des, String ip, String send) {
+        this.des = des;
+        this.ip = ip;
+        this.send = send;
+    }
+
     public String getSend() {
         return send;
+    }
+
+    public Chat() {
     }
    
 

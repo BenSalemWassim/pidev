@@ -7,20 +7,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ChatClientController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ChatClientController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <JFXTextField fx:id="text" layoutX="97.0" layoutY="342.0" />
-            <JFXTextArea fx:id="messages" layoutX="47.0" layoutY="156.0" />
-            <JFXButton fx:id="sends" layoutX="310.0" layoutY="355.0" onAction="#send" ripplerFill="#ad2727" text="send" />
+            <JFXTextField fx:id="text" layoutX="47.0" layoutY="343.0" />
+            <JFXTextArea fx:id="messages" layoutX="47.0" layoutY="142.0" />
+            <JFXButton fx:id="sends" layoutX="238.0" layoutY="349.0" onAction="#send" ripplerFill="#ad2727" text="send" />
             <TableView fx:id="tableview" layoutX="51.0" prefHeight="142.0" prefWidth="243.0">
               <columns>
                 <TableColumn fx:id="nom" prefWidth="113.0" text="nom" />
               </columns>
             </TableView>
             <Button fx:id="chat" layoutX="478.0" layoutY="97.0" mnemonicParsing="false" onAction="#chater" text="chat" />
-            <JFXButton fx:id="ter" layoutX="534.0" layoutY="355.0" onAction="#terminer" text="terminer" />
          </children>
       </AnchorPane>
    </children>

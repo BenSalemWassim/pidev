@@ -5,6 +5,7 @@
  */
 package Services;
 
+import Entity.Interfaces.MailingServiceInterface;
 import java.util.Date;
 import java.util.Properties;
 import javafx.event.ActionEvent;
@@ -18,10 +19,11 @@ import javax.mail.internet.MimeMessage;
  *
  * @author wassim
  */
-public class MailingService {
+public class MailingService implements MailingServiceInterface {
 
     public MailingService() {
     }
+    @Override
       public void  envoi (String too,String messageTextv){
   
    try{

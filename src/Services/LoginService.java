@@ -5,6 +5,7 @@
 */
 package Services;
 
+import Entity.Interfaces.LoginServiceInterface;
 import Entity.Admin;
 import Entity.Freelance;
 import Entity.JobOwner;
@@ -30,12 +31,13 @@ import utils.ConnectionUtil;
  *
  * @author wassim
  */
-public class LoginService {
+public class LoginService implements LoginServiceInterface {
     public  static User loggedUser  = null;
           private Stage stage;
 
         
     
+    @Override
     public String logIn(String id ,String email ,String password) throws SQLException {
         
         Connection con = null;
@@ -77,7 +79,8 @@ public class LoginService {
         
         
     }
-public String AdminlogIn(String id ,String email ,String password) {
+    @Override
+    public String AdminlogIn(String id ,String email ,String password) {
         
         Connection con = null;
         PreparedStatement preparedStatement = null;
@@ -131,22 +134,26 @@ public String AdminlogIn(String id ,String email ,String password) {
     
 
 
+    @Override
     public User getLoggedUser() {
         return loggedUser;
     }
 
     
+    @Override
  public void changeLoggedUser(User user){
         loggedUser = user;
     }
  
  
+    @Override
     public void userLogout(){
         loggedUser = null;
     }
 
 
     
+    @Override
        public String MD5(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException
     {
         byte[] bytesOfMessage = password.getBytes("UTF-8");

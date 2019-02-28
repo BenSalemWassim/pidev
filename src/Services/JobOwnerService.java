@@ -5,6 +5,7 @@
 */
 package Services;
 
+import Entity.Interfaces.JobOwnerServiceInterface;
 import Entity.JobOwner;
 import Entity.User;
 import static Services.LoginService.loggedUser;
@@ -28,7 +29,7 @@ import utils.ConnectionUtil;
  *
  * @author wassim
  */
-public class JobOwnerService {
+public class JobOwnerService implements JobOwnerServiceInterface {
     Connection con = null;
     
     
@@ -39,6 +40,7 @@ public class JobOwnerService {
     
     
     
+    @Override
     public String AddJobOwner(JobOwner jo) throws SQLException {
         
         Connection con = null;
@@ -96,6 +98,7 @@ public class JobOwnerService {
         return "ok";
         
     }
+    @Override
     public JobOwner GetJobOwnerById (JobOwner jo) throws SQLException {
         
         String sql = "select * from user where id='"+jo.getId()+"'";
@@ -119,6 +122,7 @@ public class JobOwnerService {
         }
         return jol ;
     }
+    @Override
     public JobOwner GetJobOwnerByEmail (JobOwner jo) throws SQLException {
         
         String sql = "select * from user where email='"+jo.getEmail()+"'";
@@ -145,6 +149,7 @@ public class JobOwnerService {
     }
     
     
+    @Override
     public List<JobOwner> afficherJobOwners() {
         List<JobOwner> js = new ArrayList<>();
         try {
@@ -175,6 +180,7 @@ public class JobOwnerService {
     
     
     
+    @Override
     public void modifierJobOwner(JobOwner u,String id) {
         try {
             String reqUpdate = "update user set"
@@ -207,6 +213,7 @@ public class JobOwnerService {
             ex.printStackTrace();
         }
     }
+    @Override
     public String supprimerJobOwner (String id) {
         try {
             String reqDelete = "delete from user where id=?";
@@ -240,6 +247,7 @@ public class JobOwnerService {
     }
     
  
+    @Override
     public void changerMDP(String mdp ,String newMdp,String id)
     {
         try {
@@ -274,6 +282,7 @@ public class JobOwnerService {
     }
     
     
+    @Override
     public String MD5(String password) throws UnsupportedEncodingException, NoSuchAlgorithmException
     {
         byte[] bytesOfMessage = password.getBytes("UTF-8");
@@ -290,6 +299,7 @@ public class JobOwnerService {
     
     
     
+    @Override
     public boolean uniqueMail(String mail)
     {
         boolean free=true;
@@ -310,6 +320,7 @@ public class JobOwnerService {
         }
         return free;
     }
+    @Override
     public boolean uniquePseudo(String id)
     {
         boolean free=true;

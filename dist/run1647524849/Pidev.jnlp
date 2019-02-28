@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Pidev.jar" size="171988" download="eager" />
+    <jar href="Pidev.jar" size="183740" download="eager" />
     <jar href="lib\UndecoratorBis.jar" size="121176" download="eager" />
     <jar href="lib\activation.jar" size="124332" download="eager" />
     <jar href="lib\commons-net-3.6.jar" size="307410" download="eager" />

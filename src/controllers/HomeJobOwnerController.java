@@ -116,6 +116,26 @@ public class HomeJobOwnerController implements Initializable {
     }
    
 
-  
+    @FXML
+    void chat(ActionEvent event) throws IOException {
+        
+        
+
+     
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/chat.fxml"));
+          Parent view = (Parent) loader.load();
+          root.setCenter(view);
+          
+      
+      
+    }
+      @FXML
+
+   void msgs (ActionEvent event) throws IOException{
+   
+          FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/chatClient.fxml"));
+          Parent view = (Parent) loader.load();
+          root.setCenter(view);
+   }
     
 }

@@ -14,6 +14,8 @@
             <VBox prefHeight="700.0" prefWidth="163.0" style="-fx-background-color: #222222;" BorderPane.alignment="CENTER">
                <children>
                   <JFXButton fx:id="ProfilAction" onAction="#ProfilAction" prefHeight="59.0" prefWidth="170.0" text="Profil" textFill="#f2eded" />
+                  <JFXButton fx:id="ProfilAction1" layoutX="10.0" layoutY="10.0" onAction="#chat" prefHeight="59.0" prefWidth="170.0" text="chat" textFill="#f2eded" />
+                  <JFXButton fx:id="msg" layoutX="10.0" layoutY="69.0" onAction="#msgs" prefHeight="59.0" prefWidth="170.0" text="Masseges" textFill="#f2eded" />
                </children>
             </VBox>
          </left>
